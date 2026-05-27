@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightweight House Comparison Sheet</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #1a365d; border-bottom: 2px solid #2b6cb0; padding-bottom: 10px; margin-top: 0; font-size: 24px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { background-color: #2b6cb0; color: white; font-weight: 600; }
+        tr:nth-child(even) { background-color: #f7fafc; }
+        .subtext { font-size: 11px; color: #718096; display: block; }
+        input[type="number"] { width: 70px; padding: 6px; border: 1px solid #cbd5e0; border-radius: 4px; text-align: center; }
+        input[type="text"] { width: 100%; box-sizing: border-box; padding: 6px; border: 1px solid #cbd5e0; border-radius: 4px; font-weight: bold; }
+        .total-row { font-weight: bold; background-color: #ebf8ff !important; font-size: 18px; color: #2b6cb0; }
+        .center { text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Digital House Comparison Sheet</h1>
+    <p>Enter the names of the houses below, type in your scores for each parameter, and look at the bottom row to instantly see the totals out of 145.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 40%;">Criteria & Rules</th>
+                <th style="width: 10%;" class="center">Max</th>
+                <th style="width: 25%;" class="center"><input type="text" id="nameH1" value="House 1" oninput="saveNames()"></th>
+                <th style="width: 25%;" class="center"><input type="text" id="nameH2" value="House 2" oninput="saveNames()"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Hard Tier Criteria -->
+            <tr>
+                <td><strong>1. Built-up Area</strong><span class="subtext">&ge;1600=10 | 1300-1599=8 | &lt;1300=0</span></td>
+                <td class="center">10</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>2. Plot Size</strong><span class="subtext">&ge;4.5c=10 | 3.0-4.4c=8 | &lt;3.0c=0</span></td>
+                <td class="center">10</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>3. Distance from Office</strong><span class="subtext">&le;8km=10 | 8-10km=9 | &gt;10km=8</span></td>
+                <td class="center">10</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            
+            <!-- Subjective 10 Mark Criteria -->
+            <tr>
+                <td><strong>4. Legal & Documentation</strong><span class="subtext">Clear titles, permits, certificates (0-10)</span></td>
+                <td class="center">10</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>5. Road Access</strong><span class="subtext">Road width and maneuvering ease (0-10)</span></td>
+                <td class="center">10</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>6. Build Quality</strong><span class="subtext">Structural finish, cracks, plastering (0-10)</span></td>
+                <td class="center">10</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>7. Material Quality</strong><span class="subtext">Flooring, electrical, plumbing brands (0-10)</span></td>
+                <td class="center">10</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>8. Land Quality</strong><span class="subtext">Soil type, foundation strength, slope (0-10)</span></td>
+                <td class="center">10</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>9. Neighborhood</strong><span class="subtext">Safety, quietness, convenience (0-10)</span></td>
+                <td class="center">10</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>10. Flooding & Drainage</strong><span class="subtext">No historical monsoon waterlogging (0-10)</span></td>
+                <td class="center">10</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>11. Resale Value</strong><span class="subtext">Growth potential of area/demand (0-10)</span></td>
+                <td class="center">10</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>12. Interior Design</strong><span class="subtext">Space efficiency and layout flow (0-10)</span></td>
+                <td class="center">10</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="10" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            
+            <!-- Subjective 5 Mark Criteria -->
+            <tr>
+                <td><strong>13. Work Area</strong><span class="subtext">Secondary kitchen/utility space utility (0-5)</span></td>
+                <td class="center">5</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="5" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="5" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>14. Carporch</strong><span class="subtext">Sizing, roof, ease of parking (0-5)</span></td>
+                <td class="center">5</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="5" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="5" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>15. Well</strong><span class="subtext">Water yield and quality status (0-5)</span></td>
+                <td class="center">5</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="5" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="5" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>16. Modular Kitchen</strong><span class="subtext">Cabinets, hardware, layouts (0-5)</span></td>
+                <td class="center">5</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="5" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="5" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            <tr>
+                <td><strong>17. Light & Ventilation</strong><span class="subtext">Natural airflow and day lighting (0-5)</span></td>
+                <td class="center">5</td>
+                <td class="center"><input type="number" class="h1-score" min="0" max="5" value="0" oninput="calculateTotals()"></td>
+                <td class="center"><input type="number" class="h2-score" min="0" max="5" value="0" oninput="calculateTotals()"></td>
+            </tr>
+            
+            <!-- Grand Total Row -->
+            <tr class="total-row">
+                <td>TOTAL SCORE</td>
+                <td class="center">145</td>
+                <td class="center" id="totalH1">0</td>
+                <td class="center" id="totalH2">0</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function calculateTotals() {
+        let sumH1 = 0;
+        let sumH2 = 0;
+        
+        document.querySelectorAll('.h1-score').forEach(input => {
+            let maxVal = parseInt(input.getAttribute('max'));
+            let val = parseInt(input.value) || 0;
+            if (val > maxVal) { val = maxVal; input.value = maxVal; }
+            if (val < 0) { val = 0; input.value = 0; }
+            sumH1 += val;
+        });
+
+        document.querySelectorAll('.h2-score').forEach(input => {
+            let maxVal = parseInt(input.getAttribute('max'));
+            let val = parseInt(input.value) || 0;
+            if (val > maxVal) { val = maxVal; input.value = maxVal; }
+            if (val < 0) { val = 0; input.value = 0; }
+            sumH2 += val;
+        });
+
+        document.getElementById('totalH1').innerText = sumH1 + " / 145";
+        document.getElementById('totalH2').innerText = sumH2 + " / 145";
+    }
+    
+    function saveNames() {
+        // Keeps names interactive
+    }
+    
+    // Initial run to set zeroes
+    calculateTotals();
+</script>
+
+</body>
+</html>p
